@@ -2,7 +2,7 @@ import numpy as np
 from tqdm import tqdm
 from itertools import combinations
 
-def HyperbolicLCS(eps,lam,tv,xP,yP):
+def HyperbolicLCS_2D(direction,xP,yP,tv,eps,lam=1e-10):
 
     # Number of particles
     NP = xP.shape[0]
@@ -10,8 +10,12 @@ def HyperbolicLCS(eps,lam,tv,xP,yP):
     T = tf-t0
 
     # Extract initial and final time snapshots
-    xP0, yP0 = xP[:,0], yP[:,0]
-    xPf, yPf = xP[:,-1], yP[:,-1]
+    if direction == 'forward':
+        xP0, yP0 = xP[:,0], yP[:,0]
+        xPf, yPf = xP[:,-1], yP[:,-1]
+    elif direction == 'backward':
+        xP0, yP0 = xP[:,-1], yP[:,-1]
+        xPf, yPf = xP[:,0], yP[:,0]
 
     # Calculate FTLE values at each particle
     FTLE = np.zeros(NP)
@@ -36,6 +40,54 @@ def HyperbolicLCS(eps,lam,tv,xP,yP):
         # Least square fit of flow map gradient
         A = Y@X.T + lam*max(1,len(neighbors))*np.eye(2)
         B = X@X.T + lam*max(1,len(neighbors))*np.eye(2)
+        DF = A@np.linalg.inv(B)
+        
+        # Calculate FTLE as the largest singular value of DF
+        FTLE[i] = np.log(np.linalg.norm(DF,2))/T
+
+    return FTLE
+
+def HyperbolicLCS_3D(type,xP,yP,zP,tv,eps,lam=1e-10):
+
+    # Number of particles
+    NP = xP.shape[0]
+    tf, t0 = tv[-1], tv[0]
+    T = tf-t0
+
+    # Extract initial and final time snapshots
+    if type == 'forward':
+        xP0, yP0, zP0 = xP[:,0], yP[:,0], zP[:,0]
+        xPf, yPf, zPf = xP[:,-1], yP[:,-1], zP[:,-1]
+    elif type == 'backward':
+        xP0, yP0, zP0 = xP[:,-1], yP[:,-1], zP[:,-1]
+        xPf, yPf, zPf = xP[:,0], yP[:,0], zP[:,0]
+
+    # Calculate FTLE values at each particle
+    FTLE = np.zeros(NP)
+    for i in tqdm(range(NP)):
+        # Compute initial distances
+        dxP = xP0-xP0[i]
+        dyP = yP0-yP0[i]
+        dzP = zP0-zP0[i]
+        
+        # Find pairwise combinations of neighbor indices
+        neighbors = np.flatnonzero((dxP**2+dyP**2+dzP**2)<eps**2)
+        combs = list(combinations(range(len(neighbors)),2))
+        ind1 = [comb[0] for comb in combs]
+        ind2 = [comb[1] for comb in combs]
+        
+        # Form X and Y data matrices
+        X = np.zeros((3,len(combs)))
+        Y = np.zeros((3,len(combs)))
+        X[0,:] = xP0[neighbors[ind1]]-xP0[neighbors[ind2]]
+        X[1,:] = yP0[neighbors[ind1]]-yP0[neighbors[ind2]]
+        X[2,:] = zP0[neighbors[ind1]]-zP0[neighbors[ind2]]
+        Y[0,:] = xPf[neighbors[ind1]]-xPf[neighbors[ind2]]
+        Y[1,:] = yPf[neighbors[ind1]]-yPf[neighbors[ind2]]
+        Y[2,:] = zPf[neighbors[ind1]]-zPf[neighbors[ind2]]
+        # Least square fit of flow map gradient
+        A = Y@X.T + lam*max(1,len(neighbors))*np.eye(3)
+        B = X@X.T + lam*max(1,len(neighbors))*np.eye(3)
         DF = A@np.linalg.inv(B)
         
         # Calculate FTLE as the largest singular value of DF
