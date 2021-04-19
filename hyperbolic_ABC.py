@@ -1,3 +1,10 @@
+"""
+An example demonstrating the computation of forward hyperbolic LCSs in a 3D
+system, the ABC flow. In order to reduce the computational time, we only 
+consider trajectories initialized in slabs of thickness 0.2*pi at the planes
+x=0, y=0, and z=2*pi.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as sio

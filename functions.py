@@ -3,6 +3,30 @@ from tqdm import tqdm
 from itertools import combinations
 
 def HyperbolicLCS_2D(direction,xP,yP,tv,eps,lam=1e-10):
+    """
+    Computes hyperbolic LCSs in 3D trajectory datasets
+
+    Args:
+        direction: string
+            Type of hyperbolic LCS, 'forward' or 'backward'
+        xP, yP: 2D arrays
+            Coordinates of particle trajectories, with lines representing
+            different particles and columns representing different times
+        tv: 1D array
+            Times values corresponding to the columns of xP, yP
+        eps: scalar
+            Neighborhood radius for particles to feed in the least squares
+            algorithm (refer to paper for more details)
+        lam: scalar, optional
+            Weight of regularization term in the least squares objective
+            function (refer to paper for more details)
+
+    Returns:
+        FTLE: 1D array
+            FTLE values at each particle location; the forward
+            and backward FTLE are displayed at the beginning and end of the 
+            time window, respectively
+    """
 
     # Number of particles
     NP = xP.shape[0]
@@ -48,6 +72,30 @@ def HyperbolicLCS_2D(direction,xP,yP,tv,eps,lam=1e-10):
     return FTLE
 
 def HyperbolicLCS_3D(type,xP,yP,zP,tv,eps,lam=1e-10):
+    """
+    Computes hyperbolic LCSs in 3D trajectory datasets
+
+    Args:
+        direction: string
+            Type of hyperbolic LCS, 'forward' or 'backward'
+        xP, yP, zP: 2D arrays
+            Coordinates of particle trajectories, with lines representing
+            different particles and columns representing different times
+        tv: 1D array
+            Times values corresponding to the columns of xP, yP, zP
+        eps: scalar
+            Neighborhood radius for particles to feed in the least squares
+            algorithm (refer to paper for more details)
+        lam: scalar, optional
+            Weight of regularization term in the least squares objective
+            function (refer to paper for more details)
+
+    Returns:
+        FTLE: 1D array
+            FTLE values at each particle location; the forward
+            and backward FTLE are displayed at the beginning and end of the 
+            time window, respectively
+    """
 
     # Number of particles
     NP = xP.shape[0]
