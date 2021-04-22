@@ -9,7 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as sio
 
-from functions import HyperbolicLCS_3D
+from functions.hyperbolic import HyperbolicLCS_3D
 
 if __name__ == "__main__":
 
@@ -25,7 +25,7 @@ if __name__ == "__main__":
     xP, yP, zP, tv = data['xP'], data['yP'], data['zP'], data['tv'].flatten()
 
     # Compute forward hyperbolic LCS
-    FTLE = HyperbolicLCS_3D(direction,xP,yP,zP,tv,eps)
+    FTLE = HyperbolicLCS_3D(xP,yP,zP,tv,direction,eps)
 
     # Plot results
     ind = np.flatnonzero((xP[:,0]>=0) & (xP[:,0]<=2*np.pi) & 
@@ -35,6 +35,7 @@ if __name__ == "__main__":
     ax = plt.axes(projection='3d',azim=230,elev=30)
     sc = ax.scatter3D(xP[ind,0],yP[ind,0],zP[ind,0],s=6,c=FTLE[ind],cmap='jet',vmin=0,vmax=0.28)
     fig.colorbar(sc, ax=ax, ticks=np.arange(0,0.28,0.07), extend='both')
+    ax.use_sticky_edges = True
     ax.set_xlim([0,2*np.pi])
     ax.set_ylim([0,2*np.pi])
     ax.set_zlim([0,2*np.pi])

@@ -1,8 +1,13 @@
+"""
+An example demonstrating the computation of forward hyperbolic LCSs in a 2D
+system, the Bickley jet.
+"""
+
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.io as sio
 
-from functions import HyperbolicLCS_2D
+from functions.hyperbolic import HyperbolicLCS_2D
 
 if __name__ == "__main__":
 
