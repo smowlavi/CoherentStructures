@@ -177,7 +177,7 @@ def Colors(labels,cmap='tab10'):
 
     return [sorted_colors[unique_labels[lbl]] for lbl in labels]
 
-def RemoveSpuriousClusters(labels,num_clusters):
+def RemoveSpuriousClusters(labels,num_meaningful_clusters):
     """
     This function removes spurious small clusters by replacing their
     label with the value -1, so that corresponding particles are
@@ -187,7 +187,7 @@ def RemoveSpuriousClusters(labels,num_clusters):
         labels: 1D array
             Cluster labels for every particle; with label -1 indicating
             that the particle belongs to noise
-        num_clusters: int
+        num_meaningful_clusters: int
             Number of cluster to keep, ranked according to the number of
             consitutent particles. All clusters smaller than the num_clusters
             largest clusters will be assigned to noise by replacing their
@@ -205,6 +205,6 @@ def RemoveSpuriousClusters(labels,num_clusters):
     sorted_labels = freqs[freqs.index!=-1].index.tolist()
 
     # Replace the labels of small spurious clusters with the value -1
-    plabels = plabels.mask(np.isin(labels,sorted_labels[num_clusters:]), -1)
+    plabels = plabels.mask(np.isin(labels,sorted_labels[num_meaningful_clusters:]), -1)
 
     return plabels.values

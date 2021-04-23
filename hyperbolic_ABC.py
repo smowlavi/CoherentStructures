@@ -42,5 +42,6 @@ if __name__ == "__main__":
     ax.set_xlabel('$x$')
     ax.set_ylabel('$y$')
     ax.set_ylabel('$z$')
-    ax.set_title('Forward FTLE from t0 = %g to tf = %g' % (tv[0],tv[-1]))
+    ax.set_title('%s FTLE from t0 = %g to tf = %g \nwith eps = %g' 
+                 % (direction,tv[0],tv[-1],eps))
     plt.show()

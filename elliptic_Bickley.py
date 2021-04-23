@@ -1,6 +1,9 @@
 """
 An example demonstrating the computation of elliptic LCSs in a 2D system, 
-the Bickley jet.
+the Bickley jet. This script, which identifies the elliptic LCSs by visualizing 
+the clusters of particles that they enclose, would typically be run after the 
+right values for minPts, eps and num_meaningful_clusters have been found
+by running elliptic_Bickley_sweep.py.
 """
 
 import numpy as np
@@ -17,8 +20,9 @@ if __name__ == "__main__":
     SaveName = 'Bickley_NP1080_T40'
 
     # Parameters
-    eps = 2.0
     minPts = 10
+    eps = 2.0
+    num_meaningful_clusters = 7
 
     # Load data
     data = sio.loadmat(SavePath+SaveName)
@@ -44,12 +48,13 @@ if __name__ == "__main__":
     labels = EllipticLCS(Dij,minPts,eps)
 
     # Plot results
-    fig = plt.figure(figsize=[6,3])
+    fig = plt.figure(figsize=[7,3])
     ax = plt.gca()
-    sc = ax.scatter(xP[:,0],yP[:,0],s=6,c=Colors(RemoveSpuriousClusters(labels,7)))
+    sc = ax.scatter(xP[:,0],yP[:,0],s=6,c=Colors(RemoveSpuriousClusters(labels,num_meaningful_clusters)))
     ax.set_xlim([0,20])
     ax.set_ylim([-3,3])
     ax.set_xlabel('$x$')
     ax.set_ylabel('$y$')
-    ax.set_title('DBSCAN clustering with minPts = %g and eps = %g' % (eps,minPts))
+    ax.set_title('DBSCAN clustering from t0 = %g to tf = %g with minPts = %g and eps = %g' 
+                 % (tv[0],tv[-1],minPts,eps))
     plt.show()

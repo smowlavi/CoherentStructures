@@ -17,8 +17,9 @@ if __name__ == "__main__":
     SaveName = 'ABC_NP13824_T20'
 
     # Parameters
-    eps = 1.1
     minPts = 25
+    eps = 1.1
+    num_meaningful_clusters = 6
 
     # Load data
     data = sio.loadmat(SavePath+SaveName)
@@ -49,7 +50,8 @@ if __name__ == "__main__":
     # Plot results
     fig = plt.figure(figsize=[5,4])
     ax = plt.axes(projection='3d',azim=230,elev=30)
-    sc = ax.scatter3D(xP[:,0],yP[:,0],zP[:,0],s=6,c=Colors(RemoveSpuriousClusters(labels,6)))
+    sc = ax.scatter3D(xP[:,0],yP[:,0],zP[:,0],s=6,
+                      c=Colors(RemoveSpuriousClusters(labels,num_meaningful_clusters)))
     ax.use_sticky_edges = True
     ax.set_xlim([0,2*np.pi])
     ax.set_ylim([0,2*np.pi])
@@ -57,5 +59,6 @@ if __name__ == "__main__":
     ax.set_xlabel('$x$')
     ax.set_ylabel('$y$')
     ax.set_ylabel('$z$')
-    ax.set_title('DBSCAN clustering with minPts = %g and eps = %g' % (eps,minPts))
+    ax.set_title('DBSCAN clustering from t0 = %g to tf = %g \nwith minPts = %g and eps = %g' 
+                 % (tv[0],tv[-1],minPts,eps))
     plt.show()

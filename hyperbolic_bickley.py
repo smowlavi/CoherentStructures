@@ -23,7 +23,7 @@ if __name__ == "__main__":
     xP, yP, tv = data['xP'], data['yP'], data['tv'].flatten()
 
     # Compute forward hyperbolic LCS
-    FTLE = HyperbolicLCS_2D(direction,xP,yP,tv,eps)
+    FTLE = HyperbolicLCS_2D(xP,yP,tv,direction,eps)
 
     # Plot results
     fig = plt.figure(figsize=[6,3])
@@ -34,5 +34,6 @@ if __name__ == "__main__":
     ax.set_ylim([-3,3])
     ax.set_xlabel('$x$')
     ax.set_ylabel('$y$')
-    ax.set_title('Forward FTLE from t0 = %g to tf = %g' % (tv[0],tv[-1]))
+    ax.set_title('%s FTLE from t0 = %g to tf = %g with eps = %g' 
+                 % (direction,tv[0],tv[-1],eps))
     plt.show()
