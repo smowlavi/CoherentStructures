@@ -32,3 +32,5 @@ The algorithms, which take as input trajectory data for an ensemble of particles
 [Numba](https://numba.pydata.org): A JIT compiler for Python functions, used to accelerate the computation of the pairwise distance matrix.
 
 [tqdm](https://pypi.org/project/tqdm/): A progress meter for loops.
+
+[seaborn](https://pypi.org/project/tqdm/): A data visualization library.
