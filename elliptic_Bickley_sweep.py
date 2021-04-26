@@ -21,7 +21,7 @@ from functions.elliptic import PairwiseDist_2D, EllipticLCS, Colors, RemoveSpuri
 if __name__ == "__main__":
 
     SavePath = './data/'
-    SaveName = 'Bickley_NP1080_T40'
+    SaveName = 'elliptic_Bickley'
 
     # Parameters
     minPts = 10

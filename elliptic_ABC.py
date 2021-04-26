@@ -14,7 +14,7 @@ from functions.elliptic import PairwiseDist_3D, EllipticLCS, Colors, RemoveSpuri
 if __name__ == "__main__":
 
     SavePath = './data/'
-    SaveName = 'ABC_NP13824_T20'
+    SaveName = 'elliptic_ABC'
 
     # Parameters
     minPts = 25

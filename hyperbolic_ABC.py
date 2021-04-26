@@ -14,7 +14,7 @@ from functions.hyperbolic import HyperbolicLCS_3D
 if __name__ == "__main__":
 
     SavePath = './data/'
-    SaveName = 'ABC_NP100000_T20'
+    SaveName = 'hyperbolic_ABC'
 
     # Parameters
     direction = 'forward'

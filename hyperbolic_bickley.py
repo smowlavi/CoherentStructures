@@ -12,7 +12,7 @@ from functions.hyperbolic import HyperbolicLCS_2D
 if __name__ == "__main__":
 
     SavePath = './data/'
-    SaveName = 'Bickley_NP6000_T40'
+    SaveName = 'hyperbolic_Bickley'
 
     # Parameters
     direction = 'forward'
