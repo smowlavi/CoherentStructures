@@ -27,9 +27,6 @@ The algorithms, which take as input trajectory data for an ensemble of particles
 
 [pandas](https://pandas.pydata.org): A data manipulation library.  
 [scikit-learn](https://scikit-learn.org/): A machine learning library.  
-
 [Numba](https://numba.pydata.org): A JIT compiler for Python functions, used to accelerate the computation of the pairwise distance matrix.  
-
 [tqdm](https://pypi.org/project/tqdm/): A progress meter for loops.  
-
 [seaborn](https://pypi.org/project/tqdm/): A data visualization library.  
