@@ -39,7 +39,6 @@ If you use the code, we kindly ask that you cite the paper using the following r
   author = {Mowlavi, Saviz and Serra, Mattia and Maiorino, Enrico and Mahadevan, L},
   title = {Detecting Lagrangian coherent structures from sparse and noisy trajectory data},
   year = {2021},
-  publisher = {GitHub},
   journal = {arXiv preprint arXiv:2110.10884},
   howpublished = {\url{https://arxiv.org/abs/2110.10884}}
 }
