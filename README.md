@@ -1,9 +1,8 @@
 # CoherentStructures
 
-This code accompanies the paper *Coherent structures in sparse and noisy data* by Mowlavi, Serra, Maiorino, and Mahadevan (2021).
+This code accompanies the paper [Detecting Lagrangian coherent structures from sparse and noisy trajectory data](https://arxiv.org/abs/2110.10884) by Mowlavi, Serra, Maiorino, and Mahadevan (2021).
 
-We provide algorithms for the identification of Lagrangian Coherent Structures (LCSs) of hyperbolic and elliptic nature – see figure below – in flows characterized by sparse and noisy particle trajectory datasets, such as those obtained from experiments. Hyperbolic LCSs are surfaces along which the local separation rate between neighboring particles is maximized or minimized. Elliptic LCSs are surfaces enclosing regions of coherent global dynamics, that is, regions inside of
-which particles move together over time.
+We provide algorithms for the identification of Lagrangian Coherent Structures (LCSs) of hyperbolic and elliptic nature – see figure below – in flows characterized by sparse and noisy particle trajectory datasets, such as those obtained from experiments. Hyperbolic LCSs are surfaces along which the local separation rate between neighboring particles is maximized or minimized. Elliptic LCSs are surfaces enclosing regions of coherent global dynamics, that is, regions inside of which particles move together over time.
 
 The algorithms, which take as input trajectory data for an ensemble of particles, are located in the Python modules hyperbolic.py and elliptic.py in functions/. Their use is demonstrated through two of the examples shown in the paper, the Bickley jet and ABC flow.
 
@@ -30,3 +29,18 @@ The algorithms, which take as input trajectory data for an ensemble of particles
 * [tqdm](https://pypi.org/project/tqdm/): A progress meter for loops.
 * [seaborn](https://pypi.org/project/tqdm/): A data visualization library.
 * [Numba](https://numba.pydata.org): A JIT compiler for Python functions.
+
+## Citing the project
+
+If you use the code, we kindly ask that you cite the paper using the following reference:
+
+```bibtex
+@article{coherentstructures,
+  author = {Mowlavi, Saviz and Serra, Mattia and Maiorino, Enrico and Mahadevan, L},
+  title = {Detecting Lagrangian coherent structures from sparse and noisy trajectory data},
+  year = {2021},
+  publisher = {GitHub},
+  journal = {arXiv preprint arXiv:2110.10884},
+  howpublished = {\url{https://arxiv.org/abs/2110.10884}}
+}
+```
